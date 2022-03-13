@@ -1,110 +1,62 @@
-select
-	*
-from
-	pessoa;
-
-drop TABLE pessoa;
-
-SELECT
-	*
-FROM
-	PESSOA;
-
-SELECT
-	*
-FROM
-	PESSOAFISICA;
-
-SELECT
-	*
-FROM
-	PESSOJURIDICA;
-
-INSERT INTO
-	PESSOA (
-		NOME,
-		ENDERECO,
-		CEP,
-		BAIRRO,
-		CIDADE,
-		UF,
-		TELEFONE,
-		EMAIL
-	)
-VALUES
-	(
-		'amogus',
-		'amogus',
-		'amogus',
-		'amogus',
-		'amogus',
-		'amogus',
-		'amogus',
-		'amogus'
-	)
-	RETURNING idpessoa;
-
-INSERT INTO
-	PESSOAFISICA (CPF, RG, PESSOA_IDPESSOA)
-VALUES
-	(70940138174, 502, 1);
-
-INSERT INTO
-	PESSOAJURIDICA (CNPJ, PESSOA_IDPESSOA)
-VALUES
-	(708, 2);
-
-SELECT
-	IDPESSOA,
-	NOME,
-	ENDERECO,
-	CEP,
-	BAIRRO,
-	CIDADE,
-	UF,
-	TELEFONE,
-	EMAIL,
-	pf.cpf,
-	pf.rg,
-	pj.cnpj
-FROM
-	PESSOA p LEFT JOIN PESSOAFISICA pf ON pf.PESSOA_IDPESSOA = p.IDPESSOA LEFT JOIN PESSOAJURIDICA pj ON pj.PESSOA_IDPESSOA = p.IDPESSOA;
-
-SELECT
-	*
-FROM
-	PESSOA;
-
-DROP TABLE PESSOA;
-
-DROP TABLE PESSOAJURIDICA;
-
-DROP TABLE PESSOAFISICA;
-
 CREATE TABLE PESSOA (
-	IDPESSOA SERIAL PRIMARY KEY,
-	--Automaticamente gerencia as chaves primarias
-	NOME VARCHAR NOT NULL,
-	ENDERECO VARCHAR,
-	CEP VARCHAR,
-	BAIRRO VARCHAR,
-	CIDADE VARCHAR,
-	UF VARCHAR,
-	TELEFONE VARCHAR,
-	EMAIL VARCHAR
+                        IDPESSOA SERIAL PRIMARY KEY,
+    --Automaticamente gerencia as chaves primarias
+                        NOME VARCHAR NOT NULL,
+                        ENDERECO VARCHAR,
+                        CEP VARCHAR,
+                        BAIRRO VARCHAR,
+                        CIDADE VARCHAR,
+                        UF VARCHAR,
+                        TELEFONE VARCHAR,
+                        EMAIL VARCHAR
 );
 
 CREATE TABLE PESSOAFISICA (
-	CPF bigint PRIMARY KEY,
-	RG int,
-	PESSOA_IDPESSOA int,
-	FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
+                              CPF bigint PRIMARY KEY,
+                              RG int,
+                              PESSOA_IDPESSOA int,
+                              FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
 );
 
 CREATE TABLE PESSOAJURIDICA (
-	CNPJ bigint PRIMARY KEY,
-	PESSOA_IDPESSOA int,
-	FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
+                                CNPJ bigint PRIMARY KEY,
+                                PESSOA_IDPESSOA int,
+                                FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
 );
 
-select currval(pg_get_serial_sequence('pessoa','idpessoa')); --Consegue o id
+create table TRIBUNAIS (
+                           IDTRIBUNAIS serial primary key,
+                           DESCRICAO varchar,
+                           ENDERECO varchar
+);
+
+create table varas (
+                       idvaras serial primary key,
+                       descricao varchar,
+                       tribunais_idtribunais int,
+                       foreign key (tribunais_idtribunais) references tribunais (idtribunais)
+);
+
+create table auduiencias (
+                             idaudiencias serial primary key,
+                             dataaudiencia Date,
+                             parecer varchar
+);
+
+create table processos (
+                           idprocessos serial primary key,
+                           dataabertura Date,
+                           dataconclusao Date,
+                           situacao int,
+                           audiencias_idaudiencias int,
+                           foreign key (audiencias_idaudiencias) references auduiencias (idaudiencias)
+);
+
+create table custas (
+                        idcustas serial primary key,
+                        datacusta Date,
+                        descricao varchar,
+                        valor float,
+                        processos_idprocessos int,
+                        foreign key (processos_idprocessos) references processos (idprocessos)
+);
