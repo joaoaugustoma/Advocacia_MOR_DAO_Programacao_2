@@ -3,6 +3,7 @@ package classes;
 import java.util.ArrayList;
 
 public abstract class Pessoa {
+    private int id;
     private String nome;
     private String endereco;
     private String cep;
@@ -12,6 +13,14 @@ public abstract class Pessoa {
     private ArrayList<String> telefone = new ArrayList<>();
     private String email;
     private TipoPessoa tipoPessoa;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getNome() {
         return nome;

@@ -34,7 +34,7 @@ public class MostrarClientes extends JPanel {
     }
 
     public MostrarClientes() {
-        String[] columnNames = { "nome", "endereco", "cep", "bairro", "cidade", "uf", "telefone", "email", "CPF", "RG",
+        String[] columnNames = { "idpessoa","nome", "endereco", "cep", "bairro", "cidade", "uf", "telefone", "email", "CPF", "RG",
                 "CNPJ" };
 
         // final JTable table = new JTable(data, columnNames);
@@ -42,6 +42,8 @@ public class MostrarClientes extends JPanel {
         table = new JTable(mTableModel);
         table.setPreferredScrollableViewportSize(new Dimension(800, 500));
         table.setFillsViewportHeight(true);
+        table.getColumnModel().getColumn(0).setMinWidth(0);
+        table.getColumnModel().getColumn(0).setMaxWidth(0);
 
         // Create the scroll pane and add the table to it.
         JScrollPane scrollPane = new JScrollPane(table);
@@ -71,7 +73,7 @@ public class MostrarClientes extends JPanel {
 
     public void AdicionarJInTabela(PessoaJuridica pessoa) {
         mTableModel = (DefaultTableModel) table.getModel();
-        rows = new Object[] { pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
+        rows = new Object[] { pessoa.getId(), pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
                 pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(), "", "",
                 pessoa.getCnpj() };
         mTableModel.addRow(rows);
@@ -79,7 +81,7 @@ public class MostrarClientes extends JPanel {
 
     public void AdicionarFInTabela(PessoaFisica pessoa) {
         mTableModel = (DefaultTableModel) table.getModel();
-        rows = new Object[] { pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
+        rows = new Object[] {pessoa.getId(), pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
                 pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(), pessoa.getCpf(),
                 pessoa.getRg(), "" };
         mTableModel.addRow(rows);
