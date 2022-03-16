@@ -55,7 +55,7 @@ class RemovervarasListener implements ActionListener{
 
         int []rows = aux.getSelectedRows();
         if(aux.getSelectedRowCount() > 0){
-            for(int i = 0; i<aux.getSelectedRowCount(); i++){
+            for(int i = 0; i<=aux.getSelectedRowCount(); i++){
                 int id = Integer.parseInt((aux.getValueAt(rows[i], 0)).toString());
                 System.out.println("ID: " + id);
                 if(VarasDAO.getInstance().DeleteVaras(id)){
