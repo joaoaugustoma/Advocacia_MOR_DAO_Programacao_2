@@ -15,8 +15,6 @@ import classes.PessoaFisica;
 import classes.PessoaJuridica;
 import dao.PessoaDAO;
 
-import gui.table.MostrarVaras;
-
 public class MostrarClientes extends JPanel {
     // TODO Adicionar Facha com nome de cliente por cima
     JTable table;
@@ -34,8 +32,7 @@ public class MostrarClientes extends JPanel {
     }
 
     public MostrarClientes() {
-        String[] columnNames = { "nome", "endereco", "cep", "bairro", "cidade", "uf", "telefone", "email", "CPF", "RG",
-                "CNPJ" };
+        String[] columnNames = { "nome", "endereco", "cep", "bairro", "cidade", "uf", "telefone", "email", "CPF", "RG", "CNPJ" };
 
         // final JTable table = new JTable(data, columnNames);
         mTableModel = new DefaultTableModel(columnNames, 0);
@@ -61,7 +58,7 @@ public class MostrarClientes extends JPanel {
 
         while (rs.next()) {
             // add the values to the temporary row
-            rows = new Object[] { rs.getInt("idpessoa") ,rs.getString("nome"), rs.getString("endereco"), rs.getString("cep"),
+            rows = new Object[] { rs.getString("nome"), rs.getString("endereco"), rs.getString("cep"),
                     rs.getString("bairro"), rs.getString("cidade"), rs.getString("uf"), rs.getString("telefone"),
                     rs.getString("email"), rs.getString("cpf"), rs.getString("rg"), rs.getString("cnpj") };
             // add the temp row to the table
@@ -72,21 +69,15 @@ public class MostrarClientes extends JPanel {
     public void AdicionarJInTabela(PessoaJuridica pessoa) {
         mTableModel = (DefaultTableModel) table.getModel();
         rows = new Object[] { pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
-                pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(), "", "",
-                pessoa.getCnpj() };
+                pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(),"","",pessoa.getCnpj() };
         mTableModel.addRow(rows);
     }
 
     public void AdicionarFInTabela(PessoaFisica pessoa) {
         mTableModel = (DefaultTableModel) table.getModel();
         rows = new Object[] { pessoa.getNome(), pessoa.getEndereco(), pessoa.getCep(), pessoa.getBairro(),
-                pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(), pessoa.getCpf(),
-                pessoa.getRg(), "" };
+                pessoa.getCidade(), pessoa.getUf(), pessoa.getTelefone(0), pessoa.getEmail(),pessoa.getCpf(),pessoa.getRg(),"" };
         mTableModel.addRow(rows);
-    }
-
-    public void RemoveFromTabela(int x) {
-        mTableModel.removeRow(x);
     }
 
     public JTable MontarTabela() {

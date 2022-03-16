@@ -27,8 +27,7 @@ public class PessoaDAO {
     // Busca todos as pessoas existentes de um banco de dados, e a coloca em um
     // vetor
     public ResultSet VerificarPessoa() {
-        sql = "SELECT idpessoa," + tabelas
-                + " , pf.cpf, pf.rg, pj.cnpj from PESSOA p LEFT JOIN PESSOAFISICA pf ON pf.PESSOA_IDPESSOA = p.IDPESSOA LEFT JOIN PESSOAJURIDICA pj ON pj.PESSOA_IDPESSOA = p.IDPESSOA;";
+        sql = "SELECT idpessoa," + tabelas + " , pf.cpf, pf.rg, pj.cnpj from PESSOA p LEFT JOIN PESSOAFISICA pf ON pf.PESSOA_IDPESSOA = p.IDPESSOA LEFT JOIN PESSOAJURIDICA pj ON pj.PESSOA_IDPESSOA = p.IDPESSOA;";
         try {
             Statement Statement = JavaDataBaseConnection.getInstance().connection().createStatement();
             ResultSet resultado = Statement.executeQuery(sql);
@@ -42,9 +41,8 @@ public class PessoaDAO {
     }
 
     public void EnviarPessoaFisica(PessoaFisica pessoaFisica) {
-        // Não achei uma melhor solução
-        // Gambiarra, manda informação das pessoas, e retorna o ID para ser usado por
-        // pessoa Juridica
+        //Não achei uma melhor solução
+        //Gambiarra, manda informação das pessoas, e retorna o ID para ser usado por pessoa Juridica
         int id = SendPessoaBD(pessoaFisica);
         try {
             String sql = "INSERT INTO pessoafisica (cpf,rg,pessoa_idpessoa) values (?,?,?)";
@@ -63,9 +61,8 @@ public class PessoaDAO {
     }
 
     public void EnviarPessoaJuridica(PessoaJuridica pessoaJuridica) {
-        // Não achei uma melhor solução
-        // Gambiarra, manda informação das pessoas, e retorna o ID para ser usado por
-        // pessoa Juridica
+        //Não achei uma melhor solução
+        //Gambiarra, manda informação das pessoas, e retorna o ID para ser usado por pessoa Juridica
         int id = SendPessoaBD(pessoaJuridica);
         try {
             String sql = "INSERT INTO PESSOAJURIDICA (CNPJ, PESSOA_IDPESSOA) VALUES (?, ?);";
@@ -82,7 +79,7 @@ public class PessoaDAO {
         }
     }
 
-    // Envia a pessoa e retorna o seu id
+    //Envia a pessoa e retorna o seu id
     int SendPessoaBD(Pessoa pessoa) {
         Statement st;
         int id;
@@ -104,16 +101,16 @@ public class PessoaDAO {
         return -1;
     }
 
-    public boolean PessoaFisicaExist(String cpf) { // Conferir se funciona
+    public boolean PessoaFisicaExist(String cpf){ // Conferir se funciona
         boolean flag = false;
         sql = "SELECT cpf FROM pessoafisica";
         try {
             Statement Statement = JavaDataBaseConnection.getInstance().connection().createStatement();
             ResultSet resultado = Statement.executeQuery(sql);
-
-            while (resultado.next()) {
+            
+            while(resultado.next()){
                 String cpfBD = resultado.getString("cpf");
-                if (cpfBD.intern() == cpf.intern()) {
+                if(cpfBD.intern() == cpf.intern()){
                     flag = true;
                 }
             }
@@ -125,16 +122,16 @@ public class PessoaDAO {
     }
 
     // Arrumar
-    public boolean PessoaJuridicaExist(String cnpj) { // Conferir se funciona
+    public boolean PessoaJuridicaExist(String cnpj){ // Conferir se funciona
         boolean flag = false;
         sql = "SELECT cnpj FROM pessoajuridica";
         try {
             Statement Statement = JavaDataBaseConnection.getInstance().connection().createStatement();
             ResultSet resultado = Statement.executeQuery(sql);
-
-            while (resultado.next()) {
+            
+            while(resultado.next()){
                 String cnpjBD = resultado.getString("cnpj");
-                if (cnpjBD.intern() == cnpj.intern()) {
+                if(cnpjBD.intern() == cnpj.intern()){
                     flag = true;
                 }
             }
@@ -144,21 +141,82 @@ public class PessoaDAO {
         }
         return flag;
     }
-
-    public boolean DeletePessoa(int ID) {
-        sql = "DELETE from pessoafisica WHERE pessoa_idpessoa = " + ID
-                + ";DELETE from pessoajuridica WHERE pessoa_idpessoa = " + ID + ";DELETE FROM pessoa WHERE idpessoa = "
-                + ID + ";";
+    
+    public void DeletePessoa(int ID){
+        sql = "delete from pessoa where idpessoa = ?";
         try {
-            PreparedStatement prepareStatement = JavaDataBaseConnection.getInstance().connection()
-                    .prepareStatement(sql);
+            PreparedStatement prepareStatement = JavaDataBaseConnection.getInstance().connection().prepareStatement(sql);
+            
+            prepareStatement.setLong(1, ID);
+
             prepareStatement.executeUpdate();
             prepareStatement.close();
 
-            return true;
         } catch (SQLException e) {
             e.getSQLState();
-            return false;
         }
+    }
+
+    public void DeletePessoaFisica(int cpf){
+        int id = 0 ; // Inicializando pra sumir um erro
+        sql = "select pessoa_idpessoa from pessoafisica where cpf = " + cpf;
+        try {
+            Statement statement = JavaDataBaseConnection.getInstance().connection().createStatement();
+            ResultSet resultado = statement.executeQuery(sql);
+
+            while(resultado.next()){
+                id = resultado.getInt("pessoa_idpessoa");
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Falha ao buscar no banco de dados:");
+            e.printStackTrace();
+        }
+
+        sql = "delete from pessoafisica where pessoa_idpessoa = ?";
+        try {
+            PreparedStatement prepareStatement = JavaDataBaseConnection.getInstance().connection().prepareStatement(sql);
+            prepareStatement.setInt(1, id);
+
+            prepareStatement.executeUpdate();
+            prepareStatement.close();
+        } catch (SQLException e) {
+            System.out.println("Falha ao buscar no banco de dados:");
+            e.printStackTrace();
+        }
+        DeletePessoa(id);
+    }
+    
+
+    public void DeletePessoaJuridica(int cnpj){
+        int id = 0 ; // Inicializando pra sumir um erro
+        sql = "select pessoa_idpessoa from pessoajuridica where cnpj = " + cnpj;
+        try {
+            Statement statement = JavaDataBaseConnection.getInstance().connection().createStatement();
+            ResultSet resultado = statement.executeQuery(sql);
+
+            while(resultado.next()){
+                id = resultado.getInt("pessoa_idpessoa");
+            }
+
+            statement.close();
+        } catch (SQLException e) {
+            System.out.println("Falha ao buscar no banco de dados:");
+            e.printStackTrace();
+        }
+
+        sql = "delete from pessoajuridica where pessoa_idpessoa = ?";
+        try {
+            PreparedStatement prepareStatement = JavaDataBaseConnection.getInstance().connection().prepareStatement(sql);
+            prepareStatement.setInt(1, id);
+
+            prepareStatement.executeUpdate();
+            prepareStatement.close();
+        } catch (SQLException e) {
+            System.out.println("Falha ao buscar no banco de dados:");
+            e.printStackTrace();
+        }
+        DeletePessoa(id);
     }
 }

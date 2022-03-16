@@ -5,15 +5,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import listener.*;
+import listener.ConsultarProcessoListener;
+import listener.GerenciarClienteListener;
+import listener.NovoProcessoListener;
 
 public class InicioGUI extends JFrame {
     NovoProcessoListener novoProcessoAction;
-    ConsultarProcessoListener consultarProcessoAction;
-    GerenciarClienteListener gerenciarClienteListener;
-    GerenciarVarasListener gerenciarVarasListener;
-    GerenciarAudienciaListener gerenciarAudienciaListener;
-    GerenciarTribunaisListener gerenciarTribunaisListener;
+    ConsultarProcessoListener continuarProcessoAction;
+    GerenciarClienteListener GerenciarClienteListener;
 
     public InicioGUI(){
         setTitle("Uns & Outros Associados | Processos");
@@ -28,37 +27,22 @@ public class InicioGUI extends JFrame {
         tituloPanel.add(processoLabel);
 
         JButton novoProcessoBtn = new JButton("Novo Processo");
-        JButton consultarProcessoBtn = new JButton("Consultar Processo");
+        JButton continuarProcessoBtn = new JButton("Continuar Processo");
         JButton GerenciarCliente = new JButton("Gerenciar Cliente");
-        JButton Gerenciarvaras = new JButton("Gerenciar Varas");
-        JButton gerenciarAudiencia = new JButton("Gerenciar Audiencia");
-        JButton gerenciarTribunais = new JButton("Gerenciar Tribunais");
 
         novoProcessoAction = new NovoProcessoListener();
         novoProcessoBtn.addActionListener(novoProcessoAction);
 
-        consultarProcessoAction = new ConsultarProcessoListener();
-        consultarProcessoBtn.addActionListener(consultarProcessoAction);
+        continuarProcessoAction = new ConsultarProcessoListener();
+        continuarProcessoBtn.addActionListener(continuarProcessoAction);
 
-        gerenciarClienteListener = new GerenciarClienteListener();
-        GerenciarCliente.addActionListener(gerenciarClienteListener);
-
-        gerenciarVarasListener = new GerenciarVarasListener();
-        Gerenciarvaras.addActionListener(gerenciarVarasListener);
-
-        gerenciarAudienciaListener = new GerenciarAudienciaListener();
-        gerenciarAudiencia.addActionListener(gerenciarAudienciaListener);
-
-        gerenciarTribunaisListener = new GerenciarTribunaisListener();
-        gerenciarTribunais.addActionListener(gerenciarTribunaisListener);
+        GerenciarClienteListener = new GerenciarClienteListener();
+        GerenciarCliente.addActionListener(GerenciarClienteListener);
 
         mainPanel.add(tituloPanel);
         mainPanel.add(novoProcessoBtn);
-        mainPanel.add(consultarProcessoBtn);
+        mainPanel.add(continuarProcessoBtn);
         mainPanel.add(GerenciarCliente);
-        mainPanel.add(Gerenciarvaras);
-        mainPanel.add(gerenciarAudiencia);
-        mainPanel.add(gerenciarTribunais);
 
         add(mainPanel);
         setVisible(true);
