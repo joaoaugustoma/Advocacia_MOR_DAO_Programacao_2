@@ -10,14 +10,14 @@ import javax.swing.JPanel;
 
 import dao.AudienciaDAO;
 import javax.swing.JTable;
-import gui.table.MostarAudiencia;
+import gui.table.MostrarAudiencia;
 
 public class GerenciarAudiencia extends JFrame {
     public GerenciarAudiencia(){
         montarJanela();
-        
+
         JPanel mainPanel = new JPanel();
-        MostarAudiencia tabela = MostarAudiencia.getInstance();
+        MostrarAudiencia tabela = MostrarAudiencia.getInstance();
         JButton AdicionarAudienciaBTN = new JButton("Adicionar Audiencia");
         JButton RemoverAudienciaBTN = new JButton("Remover Audiencia");
 
@@ -42,7 +42,7 @@ public class GerenciarAudiencia extends JFrame {
 }
 
 class AdicionarAudienciaListener implements ActionListener{
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         CadastrarAudiencia cadastrarAudiencia = new CadastrarAudiencia();
@@ -54,7 +54,7 @@ class RemoverAudienciaListener implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         JTable aux;
-        aux = MostarAudiencia.getInstance().MontarTabela();
+        aux = MostrarAudiencia.getInstance().MontrarTabela();
 
         int []rows = aux.getSelectedRows();
         if(aux.getSelectedRowCount() > 0){
@@ -63,19 +63,19 @@ class RemoverAudienciaListener implements ActionListener{
                 System.out.println("ID: " + id);
                 if(AudienciaDAO.getInstance().DeleteAudiencia(id)){
                     JOptionPane.showMessageDialog(null, "Uma audiencia foi removida!", "",
-                    JOptionPane.INFORMATION_MESSAGE);
-                    MostarAudiencia.getInstance().RemoveFromTabela(rows[i]);
+                            JOptionPane.INFORMATION_MESSAGE);
+                    MostrarAudiencia.getInstance().RemoveFromTabela(rows[i]);
                 }
                 else{
                     JOptionPane.showMessageDialog(null, "erro ao remover alguma audiencia!", "",
-                    JOptionPane.INFORMATION_MESSAGE);
+                            JOptionPane.INFORMATION_MESSAGE);
                 }
 
             }
         }
         else{
             JOptionPane.showMessageDialog(null, "Não há nada linhas selecionadas para apagar", "",
-            JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }

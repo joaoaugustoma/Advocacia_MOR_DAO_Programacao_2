@@ -7,32 +7,31 @@ import java.sql.SQLException;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTable.*;
 import javax.swing.table.DefaultTableModel;
 
-import classes.Audiencia;
-import classes.PessoaJuridica;
-import dao.AudienciaDAO;
-import dao.PessoaDAO;
+import dao.VarasDAO;
+import classes.Varas;
+import gui.table.MostrarVaras;
 
-public class MostarAudiencia extends JPanel {
-    // TODO Adicionar Facha com nome de cliente por cima
+public class MostrarVaras extends JPanel {
+
     JTable table;
     DefaultTableModel mTableModel;
     ResultSet rs;
-    public static MostarAudiencia instance;
+    public static MostrarVaras instance;
     // Cria uma array temporaria, para adicionar os dados
     Object[] rows;
 
-    public static MostarAudiencia getInstance() {
+    public static MostrarVaras getInstance(){
         if (instance == null) {
-            instance = new MostarAudiencia();
+            instance = new MostrarVaras();
         }
         return instance;
     }
 
-    public MostarAudiencia() {
-        String[] columnNames = {"idaudiencias", "dataaudiencia", "parecer" };
-
+    public MostrarVaras(){
+        String[] columnNames = { "idvaras","nº Vara", "Descrição Vara"};
         // final JTable table = new JTable(data, columnNames);
         mTableModel = new DefaultTableModel(columnNames, 0);
         table = new JTable(mTableModel);
@@ -55,27 +54,26 @@ public class MostarAudiencia extends JPanel {
     }
 
     private void AdicionarInfoTabela() throws SQLException {
-        rs = AudienciaDAO.getInstance().VerificarAudiencia();
+        rs = VarasDAO.getInstance().Verificarvaras();
 
         while (rs.next()) {
             // add the values to the temporary row
-            rows = new Object[] { rs.getInt("idaudiencias"), rs.getString("dataaudiencia"), rs.getString("parecer")};
+            rows = new Object[] {rs.getInt("idvaras"), rs.getString("nvaras"), rs.getString("descricao")};
             // add the temp row to the table
             mTableModel.addRow(rows);
         }
     }
 
-    public void AdicionarInTabela(Audiencia audiencia) {
+    public void AdicionarInTabela(Varas varas){
         mTableModel = (DefaultTableModel) table.getModel();
-        rows = new Object[] {audiencia.getId(), audiencia.getData(), audiencia.getParecer()};
+        rows = new Object[] {varas.getId(), varas.getNVaras(), varas.getDescricao()};
         mTableModel.addRow(rows);
     }
-
     public void RemoveFromTabela(int x){
         mTableModel.removeRow(x);
     }
 
-    public JTable MontarTabela() {
+    public JTable MontrarTabela() {
         return table;
     }
 }

@@ -6,9 +6,8 @@ import java.awt.event.ActionListener;
 import gui.GerenciarAudiencia;
 
 public class GerenciarAudienciaListener implements ActionListener{
-    
+
     @Override
-    public void actionPerformed(ActionEvent e) {
-        GerenciarAudiencia GerenciarAudiencia = new GerenciarAudiencia();
+    public void actionPerformed(ActionEvent e) { GerenciarAudiencia GerenciarAudiencia = new GerenciarAudiencia();
     }
 }

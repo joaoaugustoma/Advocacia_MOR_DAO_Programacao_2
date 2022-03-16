@@ -1,3 +1,29 @@
+CREATE TABLE PESSOA (
+                        IDPESSOA SERIAL PRIMARY KEY,
+    --Automaticamente gerencia as chaves primarias
+                        NOME VARCHAR NOT NULL,
+                        ENDERECO VARCHAR,
+                        CEP VARCHAR,
+                        BAIRRO VARCHAR,
+                        CIDADE VARCHAR,
+                        UF VARCHAR,
+                        TELEFONE VARCHAR,
+                        EMAIL VARCHAR
+);
+
+CREATE TABLE PESSOAFISICA (
+                              CPF bigint PRIMARY KEY,
+                              RG int,
+                              PESSOA_IDPESSOA int,
+                              FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
+);
+
+CREATE TABLE PESSOAJURIDICA (
+                                CNPJ bigint PRIMARY KEY,
+                                PESSOA_IDPESSOA int,
+                                FOREIGN KEY (PESSOA_IDPESSOA) REFERENCES PESSOA (IDPESSOA)
+);
+
 create table TRIBUNAIS (
                            IDTRIBUNAIS serial primary key,
                            DESCRICAO varchar,
@@ -6,6 +32,7 @@ create table TRIBUNAIS (
 
 create table varas (
                        idvaras serial primary key,
+                       nvaras varchar,
                        descricao varchar,
                        tribunais_idtribunais int,
                        foreign key (tribunais_idtribunais) references tribunais (idtribunais)

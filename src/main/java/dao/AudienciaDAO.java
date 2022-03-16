@@ -42,12 +42,12 @@ public class AudienciaDAO {
         try {
             String sql = "INSERT INTO audiencias (" + tabelas + ") values (\'" + audiencia.getData() + "\', \'"
                     + audiencia.getParecer() + "\') RETURNING idaudiencias";
-                st = JavaDataBaseConnection.getInstance().connection().createStatement();
-                ResultSet rs = st.executeQuery(sql);
-                if (rs.next()) {
-                    id = rs.getInt("idaudiencias");
-                    return id;
-                }
+            st = JavaDataBaseConnection.getInstance().connection().createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            if (rs.next()) {
+                id = rs.getInt("idaudiencias");
+                return id;
+            }
         } catch (SQLException e) {
             System.out.println("Erro no SQL em SendAudienciaBD Segue o Log:");
             e.printStackTrace();

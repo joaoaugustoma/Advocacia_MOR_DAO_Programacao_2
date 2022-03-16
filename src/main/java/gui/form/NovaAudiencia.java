@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 
 import classes.Audiencia;
 import dao.AudienciaDAO;
-import gui.table.MostarAudiencia;
+import gui.table.MostrarAudiencia;
 
 public class NovaAudiencia extends JPanel {
     JTextField diaJTextField, mesJTextField, anoJTextField, parecerJTextField;
@@ -69,8 +69,8 @@ public class NovaAudiencia extends JPanel {
 
                 int id = AudienciaDAO.getInstance().SendAudienciaBD(audiencia);
                 audiencia.setId(id);
-                MostarAudiencia.getInstance().AdicionarInTabela(audiencia);
-                
+                MostrarAudiencia.getInstance().AdicionarInTabela(audiencia);
+
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                         JOptionPane.INFORMATION_MESSAGE);
