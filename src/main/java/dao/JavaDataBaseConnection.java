@@ -18,7 +18,7 @@ public class JavaDataBaseConnection {
     public Connection connection() {
         String url = "jdbc:postgresql:unsoutrosassociados";
         String user = "postgres";
-        String pwd = "postgres";
+        String pwd = "1234os";
 
         try {
             Class.forName("org.postgresql.Driver");

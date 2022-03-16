@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class CadastrarCliente extends JFrame {
-    public CadastrarCliente() throws HeadlessException {
+    public CadastrarCliente(){
         montarJanela();
 
         JPanel novoCliente = new NovoCliente();

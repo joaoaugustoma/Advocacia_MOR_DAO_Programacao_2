@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import classes.PessoaFisica;
 import classes.PessoaJuridica;
 import dao.PessoaDAO;
-import gui.table.MostrarClientes;
+import gui.table.MostarAudiencia;
 
 public class SelecionarCliente extends JPanel{
     JTextField cpfTextField, cnpJTextField;
@@ -82,7 +82,7 @@ public class SelecionarCliente extends JPanel{
             if (pessoaFisicaRadio.isSelected() && !cpfTextField.getText().isEmpty()) {
                 if(PessoaDAO.getInstance().PessoaFisicaExist(cpfTextField.getText())){
                     
-                    PessoaDAO.getInstance().DeletePessoaFisica(Integer.parseInt(cpfTextField.getText()));
+                    PessoaDAO.getInstance().DeletePessoaFisica(cpfTextField.getText());
                     if(!PessoaDAO.getInstance().PessoaFisicaExist(cpfTextField.getText()))
                         JOptionPane.showMessageDialog(null, "Usúario removido!!", "",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -101,7 +101,7 @@ public class SelecionarCliente extends JPanel{
             } else if (pessoaJuridicaRadio.isSelected() && !cnpJTextField.getText().isEmpty()) {
                 if(PessoaDAO.getInstance().PessoaJuridicaExist(cnpJTextField.getText())){
                     
-                    PessoaDAO.getInstance().DeletePessoaJuridica(Integer.parseInt(cnpJTextField.getText()));
+                    PessoaDAO.getInstance().DeletePessoaJuridica(cnpJTextField.getText());
                     if(!PessoaDAO.getInstance().PessoaJuridicaExist(cnpJTextField.getText()))
                         JOptionPane.showMessageDialog(null, "Usúario removido!!", "",
                         JOptionPane.INFORMATION_MESSAGE);

@@ -6,13 +6,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import listener.ConsultarProcessoListener;
+import listener.GerenciarAudienciaListener;
 import listener.GerenciarClienteListener;
 import listener.NovoProcessoListener;
 
 public class InicioGUI extends JFrame {
     NovoProcessoListener novoProcessoAction;
     ConsultarProcessoListener continuarProcessoAction;
-    GerenciarClienteListener GerenciarClienteListener;
+    GerenciarClienteListener gerenciarClienteListener;
+    GerenciarAudienciaListener gerenciarAudienciaListener;
 
     public InicioGUI(){
         setTitle("Uns & Outros Associados | Processos");
@@ -28,7 +30,8 @@ public class InicioGUI extends JFrame {
 
         JButton novoProcessoBtn = new JButton("Novo Processo");
         JButton continuarProcessoBtn = new JButton("Continuar Processo");
-        JButton GerenciarCliente = new JButton("Gerenciar Cliente");
+        JButton gerenciarCliente = new JButton("Gerenciar Cliente");
+        JButton gerenciarAudiencia = new JButton("Gerenciar Audiencia");
 
         novoProcessoAction = new NovoProcessoListener();
         novoProcessoBtn.addActionListener(novoProcessoAction);
@@ -36,13 +39,18 @@ public class InicioGUI extends JFrame {
         continuarProcessoAction = new ConsultarProcessoListener();
         continuarProcessoBtn.addActionListener(continuarProcessoAction);
 
-        GerenciarClienteListener = new GerenciarClienteListener();
-        GerenciarCliente.addActionListener(GerenciarClienteListener);
+        gerenciarClienteListener = new GerenciarClienteListener();
+        gerenciarCliente.addActionListener(gerenciarClienteListener);
+
+        gerenciarAudienciaListener = new GerenciarAudienciaListener();
+        gerenciarAudiencia.addActionListener(gerenciarAudienciaListener);
+
 
         mainPanel.add(tituloPanel);
         mainPanel.add(novoProcessoBtn);
         mainPanel.add(continuarProcessoBtn);
-        mainPanel.add(GerenciarCliente);
+        mainPanel.add(gerenciarCliente);
+        mainPanel.add(gerenciarAudiencia);
 
         add(mainPanel);
         setVisible(true);

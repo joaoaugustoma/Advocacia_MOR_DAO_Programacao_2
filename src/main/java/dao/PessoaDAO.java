@@ -9,7 +9,6 @@ import classes.Pessoa;
 import classes.PessoaFisica;
 import classes.PessoaJuridica;
 
-@SuppressWarnings("SqlResolve")
 public class PessoaDAO {
     private String sql;
     String tabelas = "nome, endereco, cep, bairro, cidade, uf, telefone, email";
@@ -143,12 +142,9 @@ public class PessoaDAO {
     }
     
     public void DeletePessoa(int ID){
-        sql = "delete from pessoa where idpessoa = ?";
+        sql = "delete from pessoa where idpessoa = " + ID;
         try {
             PreparedStatement prepareStatement = JavaDataBaseConnection.getInstance().connection().prepareStatement(sql);
-            
-            prepareStatement.setLong(1, ID);
-
             prepareStatement.executeUpdate();
             prepareStatement.close();
 
@@ -157,7 +153,7 @@ public class PessoaDAO {
         }
     }
 
-    public void DeletePessoaFisica(int cpf){
+    public void DeletePessoaFisica(String cpf){
         int id = 0 ; // Inicializando pra sumir um erro
         sql = "select pessoa_idpessoa from pessoafisica where cpf = " + cpf;
         try {
@@ -189,8 +185,8 @@ public class PessoaDAO {
     }
     
 
-    public void DeletePessoaJuridica(int cnpj){
-        int id = 0 ; // Inicializando pra sumir um erro
+    public void DeletePessoaJuridica(String cnpj){
+        int id = 0;
         sql = "select pessoa_idpessoa from pessoajuridica where cnpj = " + cnpj;
         try {
             Statement statement = JavaDataBaseConnection.getInstance().connection().createStatement();
