@@ -6,6 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Advocacia_MOR_DAO_Programacao_2" />
         <module name="Advocacia" />
       </profile>
     </annotationProcessing>
