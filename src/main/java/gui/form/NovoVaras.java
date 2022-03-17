@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -22,13 +23,18 @@ import listener.VoltarListener;
 
 public class NovoVaras extends JPanel {
     
-    JTextField nVaraTextField, descricaoTextField;
+    JTextField numeroTribunalLabelTextField, nVaraTextField, descricaoTextField;
 
     JFrame jfvoltar;
 
     public NovoVaras(JFrame jf) {
 
         jfvoltar = jf;
+
+        JLabel numeroTribunalLabel = new JLabel("Nº do Tribunal:");
+        numeroTribunalLabelTextField = new JTextField(10);
+        add(numeroTribunalLabel);
+        add(numeroTribunalLabelTextField);
 
         JLabel nVaraLabel = new JLabel("Nº da Vara:");
         nVaraTextField = new JTextField(10);
@@ -42,6 +48,8 @@ public class NovoVaras extends JPanel {
 
         JButton submitvaras = new JButton("Salvar");
         add(submitvaras);
+
+
 
         JButton VoltarBTN = new JButton("Voltar");
         VoltarListener VoltarListener = new VoltarListener(jf);
@@ -62,10 +70,19 @@ public class NovoVaras extends JPanel {
             if (!nVaraTextField.getText().isEmpty() && !descricaoTextField.getText().isEmpty()) {
                 varas.setNVaras(nVaraTextField.getText());
                 varas.setDescricao(descricaoTextField.getText());
+                varas.setIdtribunais(Integer.parseInt(numeroTribunalLabelTextField.getText()));
 
-                int id = VarasDAO.getInstance().SendvarasBD(varas);
-                varas.setId(id);
-                MostrarVaras.getInstance().AdicionarInTabela(varas);
+                int id = 0;
+                try {
+                    id = VarasDAO.getInstance().SendvarasBD(varas);
+                    varas.setId(id);
+                    MostrarVaras.getInstance().AdicionarInTabela(varas);
+                } catch (SQLException ex) {
+                    System.out.println("Erro no SQL em SendVarasBD Segue o Log:");
+                    ex.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Tribunal não encontrado!!", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                }
                 jfvoltar.dispose();
             } else {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",

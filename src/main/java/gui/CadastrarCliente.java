@@ -21,7 +21,7 @@ public class CadastrarCliente extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar Pessoa");
-        setSize(350, 550);
-        setLocation(200, 50);
+        setSize(350, 480);
+        setLocation(500, 180);
     }
 }

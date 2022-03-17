@@ -50,6 +50,8 @@ create table processos (
                            dataconclusao Date,
                            situacao int,
                            audiencias_idaudiencias int,
+                           foreign key (cliente_idpessoa) references pessoa (idpessoa),
+                           foreign key (partecontraria_idpessoa) references pessoa (idpessoa),
                            foreign key (audiencias_idaudiencias) references audiencias (idaudiencias)
 );
 

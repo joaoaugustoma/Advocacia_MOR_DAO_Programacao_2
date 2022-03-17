@@ -23,7 +23,7 @@ public class CadastrarProcessos extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar Processos");
-        setSize(350, 350);
-        setLocation(200, 50);
+        setSize(350, 490);
+        setLocation(500, 180);
     }
 }

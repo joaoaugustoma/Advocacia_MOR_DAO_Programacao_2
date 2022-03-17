@@ -23,7 +23,7 @@ public class CadastrarVaras extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar varas");
-        setSize(350, 350);
-        setLocation(200, 50);
+        setSize(350, 250);
+        setLocation(500, 180);
     }
 }

@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class ProcessosDAO {
     private  String sql;
-    String tabelas = "dataabertura, dataconclusao, situacao";
+    String tabelas = "dataabertura, dataconclusao, situacao, audiencias_idaudiencias, cliente_idpessoa, partecontraria_idpessoa";
     private static ProcessosDAO instance;
 
     // Singleton ProcessosDAO
@@ -42,22 +42,18 @@ public class ProcessosDAO {
 
 
     //Envia a pessoa e retorna o seu id
-    public int SendProcessosBD(Processos Processos){
+    public int SendProcessosBD(Processos Processos) throws SQLException {
         Statement st;
         int id;
-        try {
-            String sql = "INSERT INTO Processos (" + tabelas + ") values (\'" + Processos.getDataAbertura() + "\', \'"
-                    + Processos.getDataConclusao() + "\',\'" + Processos.getSituacao() + "\') RETURNING idprocessos";
-            st = JavaDataBaseConnection.getInstance().connection().createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            if (rs.next()) {
-                id = rs.getInt("idprocessos");
-                return id;
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro no SQL em SendProcessosBD Segue o Log:");
-            e.printStackTrace();
+        String sql = "INSERT INTO Processos (" + tabelas + ") values (\'" + Processos.getDataAbertura() + "\', \'"
+                + Processos.getDataConclusao() + "\',\'" + Processos.getSituacao() + "\',\'"+ Processos.getIdAudiencia() + "\', \'" + Processos.getIdNomeCliente() + "\',\'" + Processos.getIdParteContraria() + "\') RETURNING idprocessos";
+        st = JavaDataBaseConnection.getInstance().connection().createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) {
+            id = rs.getInt("idprocessos");
+            return id;
         }
+
         return -1;
     }
 

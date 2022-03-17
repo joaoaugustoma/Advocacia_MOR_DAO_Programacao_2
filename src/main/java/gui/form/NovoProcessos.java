@@ -1,11 +1,7 @@
 package gui.form;
 
-import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 
 
 import javax.swing.JButton;
@@ -15,6 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.sql.Date;
+import java.sql.SQLException;
 
 import classes.Processos;
 import dao.ProcessosDAO;
@@ -23,13 +20,28 @@ import listener.VoltarListener;
 
 public class NovoProcessos extends JPanel {
     
-    JTextField diaAberturaTextField, mesAberturaTextField, anoAberturaTextField, diaConclusaoTextField, mesConclusaoTextField, anoConclusaoTextField, situacaoTextField ;
+    JTextField diaAberturaTextField, mesAberturaTextField, anoAberturaTextField, diaConclusaoTextField, mesConclusaoTextField, anoConclusaoTextField, situacaoTextField, idAudienciaTextField, idClienteTextField, idParteContrariaTextField;
 
     JFrame jfvoltar;
 
     public NovoProcessos(JFrame jf) {
 
         jfvoltar = jf;
+
+        JLabel idAudienciaJLabel = new JLabel("ID da audiência:");
+        idAudienciaTextField = new JTextField(10);
+        add(idAudienciaJLabel);
+        add(idAudienciaTextField);
+
+        JLabel clienteJLabel = new JLabel("ID do cliente:");
+        idClienteTextField = new JTextField(10);
+        add(clienteJLabel);
+        add(idClienteTextField);
+
+        JLabel parteContrariaLabel = new JLabel("ID Parte contrária:");
+        idParteContrariaTextField = new JTextField(10);
+        add(parteContrariaLabel);
+        add(idParteContrariaTextField);
 
         JLabel diaAberturaJLabel = new JLabel("Dia de Abertura do Processo:");
         diaAberturaTextField = new JTextField(10);
@@ -95,14 +107,24 @@ public class NovoProcessos extends JPanel {
                 int mesConclusao = Integer.parseInt(mesConclusaoTextField.getText()) - 1;
                 int anoConclusao = Integer.parseInt(anoConclusaoTextField.getText()) - 1900;
 
-
+                Processos.setIdAudiencia(Integer.parseInt(idAudienciaTextField.getText()));
+                Processos.setIdNomeCliente(Integer.parseInt(idClienteTextField.getText()));
+                Processos.setIdParteContraria(Integer.parseInt(idParteContrariaTextField.getText()));
                 Processos.setDataAbertura(new Date(anoAbertura, mesAbertura, diaAbertura));
                 Processos.setDataConclusao(new Date(anoConclusao, mesConclusao, diaConclusao));
                 Processos.setSituacao(situacaoTextField.getText());
 
-                int id = ProcessosDAO.getInstance().SendProcessosBD(Processos);
-                Processos.setId(id);
-                MostrarProcessos.getInstance().AdicionarInTabela(Processos);
+                int id = 0;
+                try {
+                    id = ProcessosDAO.getInstance().SendProcessosBD(Processos);
+                    Processos.setId(id);
+                    MostrarProcessos.getInstance().AdicionarInTabela(Processos);
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Dados inválidos!!", "",
+                            JOptionPane.INFORMATION_MESSAGE);
+                    ex.printStackTrace();
+                }
+
                 jfvoltar.dispose();
             } else {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",

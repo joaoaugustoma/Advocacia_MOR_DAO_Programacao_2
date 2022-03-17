@@ -38,8 +38,8 @@ public class GerenciarProcessos extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Gerenciar Processos");
-        setSize(1000, 700);
-        setLocation(200, 50);
+        setSize(900, 700);
+        setLocation(200, 120);
     }
 }
 

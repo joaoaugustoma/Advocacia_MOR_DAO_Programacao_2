@@ -23,7 +23,7 @@ public class CadastrarTribunais extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar tribunais");
-        setSize(350, 350);
-        setLocation(200, 50);
+        setSize(350, 195);
+        setLocation(500, 180);
     }
 }

@@ -23,7 +23,7 @@ public class CadastrarCustas extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar Custas");
-        setSize(350, 550);
-        setLocation(200, 50);
+        setSize(350, 330);
+        setLocation(500, 180);
     }
 }

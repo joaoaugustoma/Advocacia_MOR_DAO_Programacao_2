@@ -1,11 +1,10 @@
 package gui;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 import listener.*;
+
+import java.awt.*;
 
 public class InicioGUI extends JFrame {
     GerenciarClienteListener gerenciarClienteListener;
@@ -17,15 +16,11 @@ public class InicioGUI extends JFrame {
 
     public InicioGUI(){
         setTitle("Uns & Outros Associados | Processos");
-        setSize(1000, 700);
-        setLocation(200, 50);
+        setSize(900, 100);
+        setLocation(200, 30);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
-        JPanel tituloPanel = new JPanel();
-
-        JLabel processoLabel = new JLabel("PROCESSOS");
-        tituloPanel.add(processoLabel);
 
         JButton GerenciarCliente = new JButton("Gerenciar Pessoa");
         JButton Gerenciarvaras = new JButton("Gerenciar Varas");
@@ -52,14 +47,12 @@ public class InicioGUI extends JFrame {
         gerenciarCustasListener = new GerenciarCustasListener();
         gerenciarCustas.addActionListener(gerenciarCustasListener);
 
-        mainPanel.add(tituloPanel);
         mainPanel.add(GerenciarCliente);
+        mainPanel.add(gerenciarTribunais);
         mainPanel.add(Gerenciarvaras);
         mainPanel.add(gerenciarAudiencia);
-        mainPanel.add(gerenciarTribunais);
         mainPanel.add(gerenciarProcessos);
         mainPanel.add(gerenciarCustas);
-        
 
         add(mainPanel);
         setVisible(true);

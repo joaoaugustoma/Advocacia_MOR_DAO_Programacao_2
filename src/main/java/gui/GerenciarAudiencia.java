@@ -42,8 +42,8 @@ public class GerenciarAudiencia extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Gerenciar Audiencia");
-        setSize(1000, 700);
-        setLocation(200, 50);
+        setSize(900, 700);
+        setLocation(200, 120);
     }
 }
 

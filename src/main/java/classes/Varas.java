@@ -4,6 +4,24 @@ public class Varas {
     int id;
     private String nvaras;
     private String descricao;
+    private int idtribunais;
+
+    public String getNvaras() {
+        return nvaras;
+    }
+
+    public void setNvaras(String nvaras) {
+        this.nvaras = nvaras;
+    }
+
+    public int getIdtribunais() {
+        return idtribunais;
+    }
+
+    public void setIdtribunais(int idtribunais) {
+        this.idtribunais = idtribunais;
+    }
+
 
     public int getId(){
         return id;

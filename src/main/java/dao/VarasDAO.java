@@ -10,7 +10,7 @@ import java.sql.Statement;
 
 public class VarasDAO {
     private  String sql;
-    String tabelas = "nvaras, descricao";
+    String tabelas = "nvaras, descricao, tribunais_idtribunais";
     private static VarasDAO instance;
 
     // Singleton varasDAO
@@ -42,21 +42,16 @@ public class VarasDAO {
 
 
     //Envia a pessoa e retorna o seu id
-    public int SendvarasBD(Varas varas){
+    public int SendvarasBD(Varas varas) throws SQLException {
         Statement st;
         int id;
-        try {
-            String sql = "INSERT INTO varas (" + tabelas + ") values (\'" + varas.getNVaras() + "\', \'"
-                    + varas.getDescricao() + "\') RETURNING idvaras";
-            st = JavaDataBaseConnection.getInstance().connection().createStatement();
-            ResultSet rs = st.executeQuery(sql);
-            if (rs.next()) {
-                id = rs.getInt("idvaras");
-                return id;
-            }
-        } catch (SQLException e) {
-            System.out.println("Erro no SQL em SendVarasBD Segue o Log:");
-            e.printStackTrace();
+        String sql = "INSERT INTO varas (" + tabelas + ") values (\'" + varas.getNVaras() + "\', \'"
+                + varas.getDescricao() + "\', \'" + varas.getIdtribunais() + "\') RETURNING idvaras";
+        st = JavaDataBaseConnection.getInstance().connection().createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        if (rs.next()) {
+            id = rs.getInt("idvaras");
+            return id;
         }
         return -1;
     }

@@ -23,7 +23,7 @@ public class CadastrarAudiencia extends JFrame {
 
     void montarJanela() {
         setTitle("Uns & Outros Associados | Cadastrar Audiencia");
-        setSize(350, 550);
-        setLocation(200, 50);
+        setSize(350, 280);
+        setLocation(500, 180);
     }
 }

@@ -58,7 +58,7 @@ public class MostrarVaras extends JPanel {
 
         while (rs.next()) {
             // add the values to the temporary row
-            rows = new Object[] {rs.getInt("idvaras"), rs.getString("nvaras"), rs.getString("descricao")};
+            rows = new Object[] {rs.getInt("idvaras"), rs.getString("nvaras"), rs.getString("descricao"), rs.getString("tribunais_idtribunais")};
             // add the temp row to the table
             mTableModel.addRow(rows);
         }
@@ -66,7 +66,7 @@ public class MostrarVaras extends JPanel {
 
     public void AdicionarInTabela(Varas varas){
         mTableModel = (DefaultTableModel) table.getModel();
-        rows = new Object[] {varas.getId(), varas.getNVaras(), varas.getDescricao()};
+        rows = new Object[] {varas.getId(), varas.getNVaras(), varas.getDescricao(), varas.getIdtribunais()};
         mTableModel.addRow(rows);
     }
     public void RemoveFromTabela(int x){
