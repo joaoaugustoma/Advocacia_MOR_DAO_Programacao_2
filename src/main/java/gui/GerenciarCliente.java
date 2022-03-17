@@ -19,8 +19,8 @@ public class GerenciarCliente extends JFrame {
 
         JPanel mainPanel = new JPanel();
         MostrarClientes tabela = MostrarClientes.getInstance();
-        JButton AdicionarClienteBTN = new JButton("Adicionar Cliente");
-        JButton RemoverClienteBTN = new JButton("Remover Cliente");
+        JButton AdicionarClienteBTN = new JButton("Adicionar Pessoa");
+        JButton RemoverClienteBTN = new JButton("Remover Pessoa");
         JButton VoltarBTN = new JButton("Voltar");
 
         AdicionarClienteListener AdicionarClienteListener = new AdicionarClienteListener();
@@ -41,7 +41,7 @@ public class GerenciarCliente extends JFrame {
     }
 
     void montarJanela() {
-        setTitle("Uns & Outros Associados | Gerenciar Cliente");
+        setTitle("Uns & Outros Associados | Gerenciar Pessoa");
         setSize(1000, 700);
         setLocation(200, 50);
     }

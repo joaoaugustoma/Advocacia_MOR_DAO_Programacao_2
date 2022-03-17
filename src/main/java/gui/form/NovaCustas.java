@@ -20,6 +20,7 @@ import classes.Custas;
 import dao.CustasDAO;
 import gui.table.MostrarCustas;
 import listener.VoltarListener;
+import org.postgresql.util.PSQLException;
 
 public class NovaCustas extends JPanel {
 
@@ -95,9 +96,9 @@ public class NovaCustas extends JPanel {
                     Custas.setId(id);
                     MostrarCustas.getInstance().AdicionarInTabela(Custas);
                 } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(null, "Processo não encontrado!!", "", JOptionPane.INFORMATION_MESSAGE);
+                    System.out.println("Erro no SQL em SendCustasBD Segue o Log:");
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Processo não encontrado!!", "",
-                        JOptionPane.INFORMATION_MESSAGE);
                 }
                 jfvoltar.dispose();
             } else {

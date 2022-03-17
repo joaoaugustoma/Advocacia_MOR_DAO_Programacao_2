@@ -68,12 +68,12 @@ class RemoverCustasListener implements ActionListener{
                 int id = Integer.parseInt((aux.getValueAt(rows[i], 0)).toString());
                 System.out.println("ID: " + id);
                 if(CustasDAO.getInstance().DeleteCustas(id)){
-                    JOptionPane.showMessageDialog(null, "Uma vara foi removida!", "",
+                    JOptionPane.showMessageDialog(null, "Uma custa foi removida!", "",
                             JOptionPane.INFORMATION_MESSAGE);
                     MostrarCustas.getInstance().RemoveFromTabela(rows[i]);
                 }
                 else{
-                    JOptionPane.showMessageDialog(null, "erro ao remover alguma vara!", "",
+                    JOptionPane.showMessageDialog(null, "erro ao remover alguma custa!", "",
                             JOptionPane.INFORMATION_MESSAGE);
                 }
 

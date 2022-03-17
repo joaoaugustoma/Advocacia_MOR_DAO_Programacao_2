@@ -20,7 +20,7 @@ public class CadastrarCliente extends JFrame {
     }
 
     void montarJanela() {
-        setTitle("Uns & Outros Associados | Cadastrar Cliente");
+        setTitle("Uns & Outros Associados | Cadastrar Pessoa");
         setSize(350, 550);
         setLocation(200, 50);
     }
