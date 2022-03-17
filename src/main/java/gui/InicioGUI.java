@@ -5,13 +5,16 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import dao.PessoaDAO;
 import listener.*;
+
+import java.sql.SQLException;
 
 public class InicioGUI extends JFrame {
     NovoProcessoListener novoProcessoAction;
     ConsultarProcessoListener consultarProcessoAction;
     GerenciarClienteListener gerenciarClienteListener;
-    GerenciarVarasListener gerenciarVarasListener;
+        GerenciarVarasListener gerenciarVarasListener;
     GerenciarAudienciaListener gerenciarAudienciaListener;
     GerenciarTribunaisListener gerenciarTribunaisListener;
 
@@ -62,5 +65,6 @@ public class InicioGUI extends JFrame {
 
         add(mainPanel);
         setVisible(true);
+
     }
 }

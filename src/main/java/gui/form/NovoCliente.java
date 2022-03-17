@@ -160,7 +160,14 @@ public class NovoCliente extends JPanel {
                 pessoaJuridica.setCnpj(Long.valueOf(cnpJTextField.getText()));
 
                 MostrarClientes.getInstance().AdicionarJInTabela(pessoaJuridica);
-                PessoaDAO.getInstance().EnviarPessoaJuridica(pessoaJuridica);
+
+
+                try {
+                    PessoaDAO.getInstance().EnviarPessoaJuridica(pessoaJuridica);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, "deu merda!!", "", JOptionPane.INFORMATION_MESSAGE);
+                    ex.printStackTrace();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                         JOptionPane.INFORMATION_MESSAGE);
