@@ -10,7 +10,7 @@ public class CadastrarVaras extends JFrame {
     public CadastrarVaras() throws HeadlessException {
         montarJanela();
 
-        JPanel novoVaras = new NovoVaras();
+        JPanel novoVaras = new NovoVaras(this);
         JPanel mainPanel = new JPanel();
         novoVaras.setLayout(new BoxLayout(novoVaras, BoxLayout.Y_AXIS));
         novoVaras.add(Box.createHorizontalStrut(5));

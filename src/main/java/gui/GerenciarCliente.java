@@ -11,6 +11,7 @@ import javax.swing.JTable;
 
 import dao.PessoaDAO;
 import gui.table.MostrarClientes;
+import listener.VoltarListener;
 
 public class GerenciarCliente extends JFrame {
     public GerenciarCliente() {
@@ -20,6 +21,7 @@ public class GerenciarCliente extends JFrame {
         MostrarClientes tabela = MostrarClientes.getInstance();
         JButton AdicionarClienteBTN = new JButton("Adicionar Cliente");
         JButton RemoverClienteBTN = new JButton("Remover Cliente");
+        JButton VoltarBTN = new JButton("Voltar");
 
         AdicionarClienteListener AdicionarClienteListener = new AdicionarClienteListener();
         AdicionarClienteBTN.addActionListener((ActionListener) AdicionarClienteListener);
@@ -27,9 +29,13 @@ public class GerenciarCliente extends JFrame {
         RemoverClienteListener RemoverClienteListener = new RemoverClienteListener();
         RemoverClienteBTN.addActionListener((ActionListener) RemoverClienteListener);
 
+        VoltarListener VoltarListener = new VoltarListener(this);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         mainPanel.add(tabela);
         mainPanel.add(AdicionarClienteBTN);
         mainPanel.add(RemoverClienteBTN);
+        mainPanel.add(VoltarBTN);
         add(mainPanel);
         setVisible(true);
     }
@@ -39,6 +45,7 @@ public class GerenciarCliente extends JFrame {
         setSize(1000, 700);
         setLocation(200, 50);
     }
+
 }
 
 class AdicionarClienteListener implements ActionListener {

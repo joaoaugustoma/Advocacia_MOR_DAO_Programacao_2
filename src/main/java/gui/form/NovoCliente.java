@@ -1,14 +1,12 @@
 package gui.form;
 
-import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,6 +17,7 @@ import classes.PessoaFisica;
 import classes.PessoaJuridica;
 import dao.PessoaDAO;
 import gui.table.MostrarClientes;
+import listener.VoltarListener;
 
 public class NovoCliente extends JPanel {
 
@@ -27,7 +26,12 @@ public class NovoCliente extends JPanel {
     public JPanel card1, card2;
     private final JRadioButton pessoaFisicaRadio, pessoaJuridicaRadio;
 
-    public NovoCliente() {
+    JFrame jfvoltar;
+
+    public NovoCliente(JFrame jf) {
+
+        jfvoltar = jf;
+
         JLabel tipoPessoaLabel = new JLabel("Tipo pessoa:");
         radioButtonHandler radioButtonHandler = new radioButtonHandler();
         pessoaFisicaRadio = new JRadioButton("Pessoa Física", false);
@@ -101,6 +105,11 @@ public class NovoCliente extends JPanel {
         SubmitPessoaListener submitPessoaAction = new SubmitPessoaListener();
         submitPessoa.addActionListener(submitPessoaAction);
 
+        JButton VoltarBTN = new JButton("Voltar");
+        VoltarListener VoltarListener = new VoltarListener(jf);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+        
+        add(VoltarBTN);
         setVisible(true);
     }
 
@@ -144,6 +153,8 @@ public class NovoCliente extends JPanel {
 
                 MostrarClientes.getInstance().AdicionarFInTabela(pessoaFisica);
                 PessoaDAO.getInstance().EnviarPessoaFisica(pessoaFisica);
+                jfvoltar.dispose();
+
             } else if (!nomeTextField.getText().isEmpty() && !enderecoTextField.getText().isEmpty()
                     && !cepTextField.getText().isEmpty() && !bairroTextField.getText().isEmpty()
                     && !cidadeTextField.getText().isEmpty() && !ufTextField.getText().isEmpty()
@@ -160,14 +171,8 @@ public class NovoCliente extends JPanel {
                 pessoaJuridica.setCnpj(Long.valueOf(cnpJTextField.getText()));
 
                 MostrarClientes.getInstance().AdicionarJInTabela(pessoaJuridica);
-
-
-                try {
-                    PessoaDAO.getInstance().EnviarPessoaJuridica(pessoaJuridica);
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "deu merda!!", "", JOptionPane.INFORMATION_MESSAGE);
-                    ex.printStackTrace();
-                }
+                PessoaDAO.getInstance().EnviarPessoaJuridica(pessoaJuridica);
+                jfvoltar.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                         JOptionPane.INFORMATION_MESSAGE);

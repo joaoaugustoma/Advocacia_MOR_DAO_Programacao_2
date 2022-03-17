@@ -8,7 +8,7 @@ public class CadastrarCliente extends JFrame {
     public CadastrarCliente() throws HeadlessException {
         montarJanela();
 
-        JPanel novoCliente = new NovoCliente();
+        JPanel novoCliente = new NovoCliente(this);
         JPanel mainPanel = new JPanel();
         novoCliente.setLayout(new BoxLayout(novoCliente, BoxLayout.Y_AXIS));
         novoCliente.add(Box.createHorizontalStrut(5));

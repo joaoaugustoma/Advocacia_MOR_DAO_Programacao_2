@@ -10,12 +10,17 @@ import gui.table.MostrarVaras;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import listener.VoltarListener;
 
 public class NovoTribunais extends JPanel {
 
     JTextField descricaoTextField, enderecoTextField;
 
-    public NovoTribunais() {
+    JFrame jfvoltar;
+
+    public NovoTribunais(JFrame jf) {
+
+        jfvoltar = jf;
 
         JLabel descricaoLabel = new JLabel("Descrição do tribunal:");
         descricaoTextField = new JTextField(10);
@@ -30,9 +35,14 @@ public class NovoTribunais extends JPanel {
         JButton submitvaras = new JButton("Salvar");
         add(submitvaras);
 
+        JButton VoltarBTN = new JButton("Voltar");
+        VoltarListener VoltarListener = new VoltarListener(jf);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         SubmitTribunaisListener submitTribunaisListener = new SubmitTribunaisListener();
         submitvaras.addActionListener(submitTribunaisListener);
 
+        add(VoltarBTN);
         setVisible(true);
     }
 
@@ -48,6 +58,7 @@ public class NovoTribunais extends JPanel {
                 int id = TribunaisDAO.getInstance().sendTribunaisBD(tribunais);
                 tribunais.setId(id);
                 MostrarTribunais.getInstance().AdicionarInTabela(tribunais);
+                jfvoltar.dispose();
             } else {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                     JOptionPane.INFORMATION_MESSAGE);

@@ -10,7 +10,7 @@ public class CadastrarTribunais extends JFrame {
     public CadastrarTribunais() throws HeadlessException {
         montarJanela();
 
-        JPanel novoTribunais = new NovoTribunais();
+        JPanel novoTribunais = new NovoTribunais(this);
         JPanel mainPanel = new JPanel();
         novoTribunais.setLayout(new BoxLayout(novoTribunais, BoxLayout.Y_AXIS));
         novoTribunais.add(Box.createHorizontalStrut(5));

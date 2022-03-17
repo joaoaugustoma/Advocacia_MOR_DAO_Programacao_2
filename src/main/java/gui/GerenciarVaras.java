@@ -3,11 +3,15 @@ package gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
 
 import dao.VarasDAO;
-import javax.swing.JTable;
 import gui.table.MostrarVaras;
+import listener.VoltarListener;
 
 public class GerenciarVaras extends JFrame {
     public GerenciarVaras(){
@@ -17,6 +21,7 @@ public class GerenciarVaras extends JFrame {
         MostrarVaras tabela = MostrarVaras.getInstance();
         JButton AdicionarvarasBTN = new JButton("Adicionar varas");
         JButton RemovervarasBTN = new JButton("Remover varas");
+        JButton VoltarBTN = new JButton("Voltar");
 
         AdicionarvarasListener AdicionarvarasListener = new AdicionarvarasListener();
         AdicionarvarasBTN.addActionListener((ActionListener) AdicionarvarasListener);
@@ -24,9 +29,13 @@ public class GerenciarVaras extends JFrame {
         RemovervarasListener RemovervarasListener = new RemovervarasListener();
         RemovervarasBTN.addActionListener((ActionListener) RemovervarasListener);
 
+        VoltarListener VoltarListener = new VoltarListener(this);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         mainPanel.add(tabela);
         mainPanel.add(AdicionarvarasBTN);
         mainPanel.add(RemovervarasBTN);
+        mainPanel.add(VoltarBTN);
         add(mainPanel);
         setVisible(true);
     }

@@ -1,7 +1,6 @@
 package dao;
 
 import classes.Tribunais;
-import classes.Varas;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

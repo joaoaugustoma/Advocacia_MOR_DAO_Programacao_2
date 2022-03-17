@@ -10,7 +10,7 @@ public class CadastrarAudiencia extends JFrame {
     public CadastrarAudiencia() {
         montarJanela();
 
-        JPanel novaAudiencia = new NovaAudiencia();
+        JPanel novaAudiencia = new NovaAudiencia(this);
         JPanel mainPanel = new JPanel();
         novaAudiencia.setLayout(new BoxLayout(novaAudiencia, BoxLayout.Y_AXIS));
         novaAudiencia.add(Box.createHorizontalStrut(5));

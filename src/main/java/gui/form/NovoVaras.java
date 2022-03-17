@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -18,12 +18,18 @@ import javax.swing.JTextField;
 import classes.Varas;
 import dao.VarasDAO;
 import gui.table.MostrarVaras;
+import listener.VoltarListener;
 
 public class NovoVaras extends JPanel {
     
     JTextField nVaraTextField, descricaoTextField;
 
-    public NovoVaras() {
+    JFrame jfvoltar;
+
+    public NovoVaras(JFrame jf) {
+
+        jfvoltar = jf;
+
         JLabel nVaraLabel = new JLabel("Nº da Vara:");
         nVaraTextField = new JTextField(10);
         add(nVaraLabel);
@@ -37,9 +43,14 @@ public class NovoVaras extends JPanel {
         JButton submitvaras = new JButton("Salvar");
         add(submitvaras);
 
+        JButton VoltarBTN = new JButton("Voltar");
+        VoltarListener VoltarListener = new VoltarListener(jf);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         SubmitvarasListener submitvarasAction = new SubmitvarasListener();
         submitvaras.addActionListener(submitvarasAction);
 
+        add(VoltarBTN);
         setVisible(true);
     }
 
@@ -55,6 +66,7 @@ public class NovoVaras extends JPanel {
                 int id = VarasDAO.getInstance().SendvarasBD(varas);
                 varas.setId(id);
                 MostrarVaras.getInstance().AdicionarInTabela(varas);
+                jfvoltar.dispose();
             } else {
             JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                     JOptionPane.INFORMATION_MESSAGE);

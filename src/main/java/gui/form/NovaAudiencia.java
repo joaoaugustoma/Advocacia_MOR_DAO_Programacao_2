@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.Date;
 
+import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -19,11 +20,17 @@ import javax.swing.JTextField;
 import classes.Audiencia;
 import dao.AudienciaDAO;
 import gui.table.MostrarAudiencia;
+import listener.VoltarListener;
 
 public class NovaAudiencia extends JPanel {
     JTextField diaJTextField, mesJTextField, anoJTextField, parecerJTextField;
 
-    public NovaAudiencia() {
+    JFrame jfvoltar;
+
+    public NovaAudiencia(JFrame jf) {
+
+        jfvoltar = jf;
+
         JLabel diaJLabel = new JLabel("Dia");
         diaJTextField = new JTextField(2);
         add(diaJLabel);
@@ -47,9 +54,14 @@ public class NovaAudiencia extends JPanel {
         JButton submitAudiencia = new JButton("Salvar");
         add(submitAudiencia);
 
+        JButton VoltarBTN = new JButton("Voltar");
+        VoltarListener VoltarListener = new VoltarListener(jf);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         submitAudienciaListener submitAudienciaAction = new submitAudienciaListener();
         submitAudiencia.addActionListener(submitAudienciaAction);
 
+        add(VoltarBTN);
         setVisible(true);
     }
 
@@ -70,7 +82,7 @@ public class NovaAudiencia extends JPanel {
                 int id = AudienciaDAO.getInstance().SendAudienciaBD(audiencia);
                 audiencia.setId(id);
                 MostrarAudiencia.getInstance().AdicionarInTabela(audiencia);
-
+                jfvoltar.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Todos os campos devem ser preenchidos!!", "",
                         JOptionPane.INFORMATION_MESSAGE);

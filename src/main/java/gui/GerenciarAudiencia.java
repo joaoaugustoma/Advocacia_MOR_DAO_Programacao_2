@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import dao.AudienciaDAO;
 import javax.swing.JTable;
 import gui.table.MostrarAudiencia;
+import listener.VoltarListener;
 
 public class GerenciarAudiencia extends JFrame {
     public GerenciarAudiencia(){
@@ -20,6 +21,7 @@ public class GerenciarAudiencia extends JFrame {
         MostrarAudiencia tabela = MostrarAudiencia.getInstance();
         JButton AdicionarAudienciaBTN = new JButton("Adicionar Audiencia");
         JButton RemoverAudienciaBTN = new JButton("Remover Audiencia");
+        JButton VoltarBTN = new JButton("Voltar");
 
         AdicionarAudienciaListener adicionarAudienciaListener = new AdicionarAudienciaListener();
         AdicionarAudienciaBTN.addActionListener((ActionListener) adicionarAudienciaListener);
@@ -27,9 +29,13 @@ public class GerenciarAudiencia extends JFrame {
         RemoverAudienciaListener RemoverAudienciaListener = new RemoverAudienciaListener();
         RemoverAudienciaBTN.addActionListener((ActionListener) RemoverAudienciaListener);
 
+        VoltarListener VoltarListener = new VoltarListener(this);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         mainPanel.add(tabela);
         mainPanel.add(AdicionarAudienciaBTN);
         mainPanel.add(RemoverAudienciaBTN);
+        mainPanel.add(VoltarBTN);
         add(mainPanel);
         setVisible(true);
     }

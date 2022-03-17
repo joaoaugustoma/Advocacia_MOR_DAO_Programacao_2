@@ -1,13 +1,17 @@
 package gui;
 
-import dao.TribunaisDAO;
-import dao.VarasDAO;
-import gui.table.MostrarTribunais;
-import gui.table.MostrarVaras;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+
+import dao.TribunaisDAO;
+import gui.table.MostrarTribunais;
+import listener.VoltarListener;
 
 public class GerenciarTribunais extends JFrame {
     public GerenciarTribunais(){
@@ -17,6 +21,7 @@ public class GerenciarTribunais extends JFrame {
         MostrarTribunais tabela = MostrarTribunais.getInstance();
         JButton addTribunaisBtn = new JButton("Adicionar tribunal");
         JButton rmvTribunaisBtn = new JButton("Remover tribunal");
+        JButton VoltarBTN = new JButton("Voltar");
 
         AdicionarTribunaisListener adicionarTribunaisListener = new AdicionarTribunaisListener();
         addTribunaisBtn.addActionListener(adicionarTribunaisListener);
@@ -24,9 +29,13 @@ public class GerenciarTribunais extends JFrame {
         RemoverTribunaisListener removerTribunaisListener = new RemoverTribunaisListener();
         rmvTribunaisBtn.addActionListener(removerTribunaisListener);
 
+        VoltarListener VoltarListener = new VoltarListener(this);
+        VoltarBTN.addActionListener((ActionListener) VoltarListener);
+
         mainPanel.add(tabela);
         mainPanel.add(addTribunaisBtn);
         mainPanel.add(rmvTribunaisBtn);
+        mainPanel.add(VoltarBTN);
         add(mainPanel);
         setVisible(true);
     }

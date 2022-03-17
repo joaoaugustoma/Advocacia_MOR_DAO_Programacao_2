@@ -5,18 +5,15 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import dao.PessoaDAO;
 import listener.*;
 
-import java.sql.SQLException;
-
 public class InicioGUI extends JFrame {
-    NovoProcessoListener novoProcessoAction;
-    ConsultarProcessoListener consultarProcessoAction;
     GerenciarClienteListener gerenciarClienteListener;
-        GerenciarVarasListener gerenciarVarasListener;
+    GerenciarVarasListener gerenciarVarasListener;
     GerenciarAudienciaListener gerenciarAudienciaListener;
     GerenciarTribunaisListener gerenciarTribunaisListener;
+    GerenciarProcessosListener gerenciarProcessosListener;
+    GerenciarCustasListener gerenciarCustasListener;
 
     public InicioGUI(){
         setTitle("Uns & Outros Associados | Processos");
@@ -30,18 +27,12 @@ public class InicioGUI extends JFrame {
         JLabel processoLabel = new JLabel("PROCESSOS");
         tituloPanel.add(processoLabel);
 
-        JButton novoProcessoBtn = new JButton("Novo Processo");
-        JButton consultarProcessoBtn = new JButton("Consultar Processo");
-        JButton GerenciarCliente = new JButton("Gerenciar Cliente");
+        JButton GerenciarCliente = new JButton("Gerenciar Pessoa");
         JButton Gerenciarvaras = new JButton("Gerenciar Varas");
         JButton gerenciarAudiencia = new JButton("Gerenciar Audiencia");
         JButton gerenciarTribunais = new JButton("Gerenciar Tribunais");
-
-        novoProcessoAction = new NovoProcessoListener();
-        novoProcessoBtn.addActionListener(novoProcessoAction);
-
-        consultarProcessoAction = new ConsultarProcessoListener();
-        consultarProcessoBtn.addActionListener(consultarProcessoAction);
+        JButton gerenciarProcessos = new JButton("Gerenciar Processos");
+        JButton gerenciarCustas = new JButton("Gerenciar Custas");
 
         gerenciarClienteListener = new GerenciarClienteListener();
         GerenciarCliente.addActionListener(gerenciarClienteListener);
@@ -55,16 +46,22 @@ public class InicioGUI extends JFrame {
         gerenciarTribunaisListener = new GerenciarTribunaisListener();
         gerenciarTribunais.addActionListener(gerenciarTribunaisListener);
 
+        gerenciarProcessosListener = new GerenciarProcessosListener();
+        gerenciarProcessos.addActionListener(gerenciarProcessosListener);
+
+        gerenciarCustasListener = new GerenciarCustasListener();
+        gerenciarCustas.addActionListener(gerenciarCustasListener);
+
         mainPanel.add(tituloPanel);
-        mainPanel.add(novoProcessoBtn);
-        mainPanel.add(consultarProcessoBtn);
         mainPanel.add(GerenciarCliente);
         mainPanel.add(Gerenciarvaras);
         mainPanel.add(gerenciarAudiencia);
         mainPanel.add(gerenciarTribunais);
+        mainPanel.add(gerenciarProcessos);
+        mainPanel.add(gerenciarCustas);
+        
 
         add(mainPanel);
         setVisible(true);
-
     }
 }
