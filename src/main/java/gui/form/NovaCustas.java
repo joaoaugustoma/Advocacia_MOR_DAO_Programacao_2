@@ -1,11 +1,7 @@
 package gui.form;
 
-import java.awt.CardLayout;
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.sql.Date;
 import java.sql.SQLException;
 
@@ -20,7 +16,6 @@ import classes.Custas;
 import dao.CustasDAO;
 import gui.table.MostrarCustas;
 import listener.VoltarListener;
-import org.postgresql.util.PSQLException;
 
 public class NovaCustas extends JPanel {
 

@@ -71,4 +71,12 @@ public class TribunaisDAO {
             return false;
         }
     }
+
+    public ResultSet consultaVaras(int id) throws SQLException {
+        sql = "select * from varas where tribunais_idtribunais = " + id;
+        Statement Statement = JavaDataBaseConnection.getInstance().connection().createStatement();
+        ResultSet resultado = Statement.executeQuery(sql);
+
+        return resultado;
+    }
 }

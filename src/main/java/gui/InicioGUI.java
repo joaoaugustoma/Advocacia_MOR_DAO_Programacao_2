@@ -13,11 +13,12 @@ public class InicioGUI extends JFrame {
     GerenciarTribunaisListener gerenciarTribunaisListener;
     GerenciarProcessosListener gerenciarProcessosListener;
     GerenciarCustasListener gerenciarCustasListener;
+    ConsultaTribunaisListener consultaTribunaisListener;
 
     public InicioGUI(){
         setTitle("Uns & Outros Associados | Processos");
-        setSize(900, 100);
-        setLocation(200, 30);
+        setSize(900, 105);
+        setLocation(200, 25);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
@@ -28,6 +29,7 @@ public class InicioGUI extends JFrame {
         JButton gerenciarTribunais = new JButton("Gerenciar Tribunais");
         JButton gerenciarProcessos = new JButton("Gerenciar Processos");
         JButton gerenciarCustas = new JButton("Gerenciar Custas");
+        JButton consultarTribunais = new JButton("Consultar Tribunais");
 
         gerenciarClienteListener = new GerenciarClienteListener();
         GerenciarCliente.addActionListener(gerenciarClienteListener);
@@ -47,12 +49,16 @@ public class InicioGUI extends JFrame {
         gerenciarCustasListener = new GerenciarCustasListener();
         gerenciarCustas.addActionListener(gerenciarCustasListener);
 
+        consultaTribunaisListener = new ConsultaTribunaisListener();
+        consultarTribunais.addActionListener(consultaTribunaisListener);
+
         mainPanel.add(GerenciarCliente);
         mainPanel.add(gerenciarTribunais);
         mainPanel.add(Gerenciarvaras);
         mainPanel.add(gerenciarAudiencia);
         mainPanel.add(gerenciarProcessos);
         mainPanel.add(gerenciarCustas);
+        mainPanel.add(consultarTribunais);
 
         add(mainPanel);
         setVisible(true);
